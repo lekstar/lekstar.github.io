@@ -6,7 +6,7 @@
 		
 		{"Board": "esp32-2432S028R", 
 		"Version": "v1.9.1", 
-		"URL": "https://github.com/lekstar/CYD-Klipper_rus/blob/master/CYD-Klipper/out/esp32-2432S028R/firmware.bin"}, 
+		"URL": "https://lekstar.github.io/CYD-Klipper_rus/esp32-2432S028R/firmware.bin"}, 
 		
 		{"Board": "esp32-2432S032C-SD", 
 		"Version": "v1.8.0", 
