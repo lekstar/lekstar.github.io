@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+    * {
+      font-family: 'Roboto', sans-serif;
+    }
+
+        TT {
+      font-family: 'Terminal', monospace;
+          background-color: #080a0b;
+    }
+
+    body {
+      background-color: #181a1b;
+      color: white;
+    }
+
+    .main {
+      width: fit-content;
+      margin: auto;
+      max-width: 750px;
+    }
+
+    .main > section > :not(:first-child) {
+      margin-left: 20px;
+    }
+
+    .main a {
+      color: #F44;
+    }
+
+    .configure {
+      margin-bottom: 300px;
+    }
+
+    .install .iconify {
+      color: green;
+      filter: drop-shadow(0 0 0.75rem lime);
+    }
+
+    #changelog-body {
+      white-space: break-spaces;
+    }
+  </style>
+  <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+  <script src="//code.iconify.design/1/1.0.6/iconify.min.js"></script>
+  <script>
+    async function fetchChangelog() {
+      const response = await fetch("https://api.github.com/repos/lekstar/CYD-Klipper_rus/releases/latest");
+      const data = await response.json();
+      document.getElementById("changelog-body").innerText = data.body;
+      document.getElementById("changelog-header-version").innerText += data.tag_name;
+    }
+
+    function setInstallButton(esp){
+      document.getElementById("install-btn").innerHTML = `<esp-web-install-button manifest="https://lekstar.github.io/CYD-Klipper/${esp}.json"></esp-web-install-button>`;
+    }
+
+    function setInstallButtonDefault(){
+      setInstallButton("esp32-2432S028R")
+    }
+
+    fetchChangelog();
+    window.onload = setInstallButtonDefault;
+  </script>
+</head>
+
+<body>
+  <section class="main">
+    <h2>CYD-Klipper-rus <span class="iconify" data-icon="mdi-printer-3d" style="color: #F44;"></span></h2>
+    <p>Этот проект - русификация проекта <a href="https://github.com/suchmememanyskill/CYD-Klipper">CYD-Klipper</a>. Данная страница так же была создана на основе исходного кода оригинального <a href="https://suchmememanyskill.github.io/CYD-Klipper/">сайта-установщика</a>.<br>Дисплей использует данные от Moonraker.<br></p>
+
+    <section class="changelog">
+      <h3 id="changelog-header"><span class="iconify" data-icon="mdi-hammer-wrench" style="color: lightgray;"></span> Changelog <span id="changelog-header-version"></span></h3>
+      <p id="changelog-body"></p>
+    </section>
+
+    <section class="donate">
+      <h3><span class="iconify" data-icon="mdi-heart" style="color:orangered; filter: drop-shadow(0 0 0.75rem crimson);"></span> Поддержка</h3>
+      <p>Вы можете поддержать разработчика оригинального исходного кода (не меня, а автора изначального проекта CYD-Klipper) по ссылке <a href="https://ko-fi.com/suchmememanyskill">Ko-Fi автора</a>.<br>Это поможет автору расширить разработку на большее число устройств.<br></p>
+    </section>
+
+    <section class="issues">
+      <h3><span class="iconify" data-icon="mdi-github" style="color: white; filter: drop-shadow(0 0 0.75rem gray);"></span> Отправка отчетов</h3>
+      <p>Если вы столкнулись с некорректным поведением прошивки или экрана или же у вас есть пожелания к реализации некоторых дополнительных функций, то можете отправить ваш запрос <a href="https://github.com/suchmememanyskill/CYD-Klipper/issues">на страничку GitHub автора проекта</a> или <a href="https://github.com/lekstar/CYD-Klipper_rus/issues">на мою страницу</a>, если нашли неточности перевода.</p>
+    </section>
+
+    <section class="install">
+      <h3><span class="iconify" data-icon="mdi-download"></span> Установка</h3>
+      <p>Выберите из списка ваше устройство и нажмите кнопку 'Connect'.<br>Замечание: Возможно, в процессе прошивки экрана вам потребуется нажать и удерживать кнопку 'BOOT' на обратной стороне платы дисплея.<br><br>По мнению автора проекта CYD-Klipper резистивный дисплей 2.8" и ёмкостной дисплей 3.5" наиболее подходящие для сборки.<br><br>Замечание для любого резистивного экрана: Вы можете сбросить калибровку экрана удерживанием кнопки BOOT в течение 8 seconds, когда экран включен.</p>
+      <select id="select-install-btn" onchange="setInstallButton(getElementById('select-install-btn').value)">
+        <option value="esp32-2432S024C-SD">ESP32-2432S024 (2.4" Ёмкостной)</option>
+        <option selected value="esp32-2432S028R">ESP32-2432S028 (2.8" Резистивный)</option>
+        <option value="esp32-2432S032C-SD">ESP32-2432S032 (3.2" Ёмкостной)</option>
+        <option value="esp32-3248S035C">ESP32-3248S035 (3.5" Ёмкостной)</option>
+        <option value="esp32-3248S035C-V">ESP32-3248S035 (3.5" Ёмкостной) Вертикальная Ориентация</option>
+        <option value="esp32-4827S043C-SD">ESP32-4827S043 (4.3" 480x270 Ёмкостной)</option>
+        <option value="esp32-8048S043C-SD">ESP32-8048S043 (4.3" 800x480 Ёмкостной)</option>
+      </select>
+      <span id="install-btn"></span>
+    </section>
+
+    <section class="configure">
+      <h3><span class="iconify" data-icon="mdi-wrench" style="color: cyan; filter: drop-shadow(0 0 0.75rem blue);"></span> Конфигурирование экрана</h3>
+      <p> После установки CYD-Klipper-rus вы можете настроить прошивку через сенсорный экран или консоль. Для использования 
+	  консоли вам нужна программа для работы с подключениями через последовательные COM-порты (например, PuTTy), подключиться 
+	  к экрану, выбрать "LOGS &amp; CONSOLE" и перезагрузить экран баз нажатий на кнопку BOOT.<br>
+	  Отправив в консоль команду <tt>help</tt>, вы увидите список доступных команд. Вам нужны следующие: <tt>ssid</tt>, <tt>ip</tt> и <tt>key</tt>.
+	  (Пока вы <i>можете</i> использовать <tt>тач-скрин</tt>, лучше всего настраивать экран именно на самом сенсорном экране	  
+
+    </section>
+  </section>
+</body>
