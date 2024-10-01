@@ -56,7 +56,7 @@
     }
 
     function setInstallButton(esp){
-      document.getElementById("install-btn").innerHTML = `<esp-web-install-button manifest="https://suchmememanyskill.github.io/CYD-Klipper/${esp}.json"></esp-web-install-button>`;
+      document.getElementById("install-btn").innerHTML = `<esp-web-install-button manifest="https://lekstar.github.io/CYD-Klipper_rus/${esp}.json"></esp-web-install-button>`;
     }
 
     function setInstallButtonDefault(){
@@ -90,7 +90,7 @@
 
     <section class="install">
       <h3><span class="iconify" data-icon="mdi-download"></span> Установка</h3>
-      <p>Выберите из списка ваше устройство и нажмите кнопку 'Connect'.<br>Замечание: Возможно, в процессе прошивки экрана вам потребуется нажать и удерживать кнопку 'BOOT' на обратной стороне платы дисплея.<br><br>По мнению автора проекта CYD-Klipper резистивный дисплей 2.8" и ёмкостной дисплей 3.5" наиболее подходящие для сборки.<br><br>Замечание для любого резистивного экрана: Вы можете сбросить калибровку экрана удерживанием кнопки BOOT в течение 8 seconds, когда экран включен.</p>
+      <p>Выберите из списка ваше устройство и нажмите кнопку 'Connect'.<br>Замечание: Возможно, в процессе прошивки экрана вам потребуется нажать и удерживать кнопку 'BOOT' на обратной стороне платы дисплея.<br><br>По мнению автора проекта CYD-Klipper резистивный дисплей 2.8" и ёмкостной дисплей 3.5" наиболее подходящие для сборки.<br><br>Замечание для любого резистивного экрана: Вы можете сбросить калибровку экрана удерживанием кнопки BOOT в течение 8 секунд, когда экран включен.</p>
       <select id="select-install-btn" onchange="setInstallButton(getElementById('select-install-btn').value)">
         <option value="esp32-2432S024C-SD">ESP32-2432S024 (2.4" Ёмкостной)</option>
         <option selected value="esp32-2432S028R">ESP32-2432S028 (2.8" Резистивный)</option>
